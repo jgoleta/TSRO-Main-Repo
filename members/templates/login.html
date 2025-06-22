@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TSRO - Login</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #1b5e20;
+    }
+
+    .container {
+      width: 420px;
+      background: #fffdf6;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 32px;
+      color: #1b5e20;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      background: #f1f8e9;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .input-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #666;
+    }
+
+    .forgot-link {
+      text-align: right;
+      margin-top: 5px;
+    }
+
+    .forgot-link a {
+      font-size: 14px;
+      color: #1b5e20;
+      text-decoration: none;
+    }
+
+    .btn-link {
+      display: block;
+      width: 100%;
+      height: 45px;
+      line-height: 45px;
+      background: #1b5e20;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-link:hover {
+      background: #145a1a;
+    }
+
+    .toggle-register {
+      margin-top: 15px;
+      background: none;
+      border: none;
+      color: #1b5e20;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .error-message {
+      color: #dc3545;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .messages {
+      margin-bottom: 20px;
+    }
+
+    .alert {
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      font-size: 22px;
+      color: #333;
+      margin: 0 8px;
+      text-decoration: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TSRO Login</h1>
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" action="{% url 'webpage1' %}">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" name="username" placeholder="Username" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Password" required>
+        <i class='bx bxs-lock-alt'></i>
+      </div>
+      <div class="forgot-link">
+        <a href="#">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="btn-link">Login</button>
+    </form>
+
+    <button class="toggle-register" onclick="toggleRegister()">Register an Account</button>
+
+    <div id="register-form" class="hidden">
+      <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="input-box">
+          <input type="text" name="reg_username" placeholder="Username" required>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+          <input type="email" name="email" placeholder="Email" required>
+          <i class='bx bxs-envelope'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" name="reg_password" placeholder="Password" required>
+          <i class='bx bxs-lock-alt'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+          <i class='bx bxs-lock'></i>
+        </div>
+        <button type="submit" class="btn-link">Register</button>
+      </form>
+    </div>
+
+    <div class="social-icons">
+      <a href="#"><i class='bx bxl-google'></i></a>
+    </div>
+  </div>
+
+  <script>
+    function toggleRegister() {
+      const regForm = document.getElementById("register-form");
+      regForm.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>
