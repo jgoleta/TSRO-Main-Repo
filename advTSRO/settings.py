@@ -77,9 +77,10 @@ WSGI_APPLICATION = 'advTSRO.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(
-        'postgresql://postgres:Karlsupot#69@db.fngppdnztjyexrkzhepz.supabase.co:5432/postgres'
+        'postgresql://postgres.fjhmljrnuezbmsoylhcc:chatgptdabest@aws-1-ap-southeast-1.pooler.supabase.com:6543/postgres'
     )
 }
+
 
 
 
