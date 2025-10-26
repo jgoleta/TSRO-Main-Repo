@@ -77,9 +77,10 @@ WSGI_APPLICATION = 'advTSRO.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.parse(
-        'postgresql://postgres:lxuxqqmSnEQzgiNIcclRTjpXpIhTXmFy@interchange.proxy.rlwy.net:37090/railway'
+        'postgresql://postgres:Karlsupot#69@db.fngppdnztjyexrkzhepz.supabase.co:5432/postgres'
     )
 }
+
 
 
 # Password validation
